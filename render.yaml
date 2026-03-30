@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: learnpro-app
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: learnpro-db
+          property: connectionString
+      - key: JWT_SECRET
+        scope: all
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+
+databases:
+  - name: learnpro-db
+    databaseName: learnpro
+    user: learnpro_user
+    plan: free
+    region: oregon
