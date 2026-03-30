@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { successResponse } from "@/lib/auth";
+import { successResponse } from "lib/auth";
 
 export async function POST(req: NextRequest) {
   const response = successResponse({ message: "Logged out successfully" });

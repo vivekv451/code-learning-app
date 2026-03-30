@@ -1,11 +1,11 @@
 
 import { NextRequest, NextResponse } from "next/server";
-import { query } from "@/lib/db";
+import { query } from "lib/db";
 import {
   comparePassword,
   generateToken,
   errorResponse,
-} from "@/lib/auth";
+} from "lib/auth";
 
 export async function POST(req: NextRequest) {
   try {

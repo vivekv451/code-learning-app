@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyToken } from '@/lib/auth';
+import { verifyToken } from './lib/auth';
 
 const publicRoutes = ['/api/auth/login', '/api/auth/register', '/api/schools/lookup'];
 
