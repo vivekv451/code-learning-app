@@ -1,6 +1,8 @@
 import { NextRequest } from "next/server";
 import { successResponse } from "../../../../lib/auth";
 
+export const runtime = 'nodejs';
+
 export async function POST(req: NextRequest) {
   const response = successResponse({ message: "Logged out successfully" });
   // Clear cookie if used
