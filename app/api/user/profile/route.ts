@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
-import { query } from 'lib/db';
-import { getAuthUser, successResponse, errorResponse } from 'lib/auth';
+import { query } from '../../../../lib/db';
+import { getAuthUser, successResponse, errorResponse } from '../../../../lib/auth';
 
 export async function GET(req: NextRequest) {
   try {

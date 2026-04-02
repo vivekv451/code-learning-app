@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { query } from 'lib/db';
-import { getAuthUser, successResponse, errorResponse } from 'lib/auth';
+import { query } from '../../../../../../lib/db';
+import { getAuthUser, successResponse, errorResponse } from '../../../../../../lib/auth';
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { courseId: string; chapterId: string } }
-) {
+export async function GET(req: NextRequest, context: any) {
   try {
     const userId = req.headers.get('x-user-id');
     const isPremium = req.headers.get('x-user-premium') === 'true';
 
-    const { courseId, chapterId } = params;
+    const { courseId, chapterId } = context.params;
 
     // Resolve course by id or slug
     const courseRes = await query(
@@ -90,13 +87,10 @@ export async function GET(
   }
 }
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { courseId: string; chapterId: string } }
-) {
+export async function POST(req: NextRequest, context: any) {
   try {
     const userId = req.headers.get('x-user-id');
-    const { courseId, chapterId } = params;
+    const { courseId, chapterId } = context.params;
 
     // Resolve course
     const courseRes = await query(

@@ -1,16 +1,13 @@
 import { NextRequest } from 'next/server';
-import { query } from 'lib/db';
-import { getAuthUser, successResponse, errorResponse } from 'lib/auth';
+import { query } from '../../../../../lib/db';
+import { getAuthUser, successResponse, errorResponse } from '../../../../../lib/auth';
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { courseId: string } }
-) {
+export async function GET(req: NextRequest, context: any) {
   try {
     const user = getAuthUser(req);
     if (!user) return errorResponse('Unauthorized', 401);
 
-    const { courseId } = params;
+    const { courseId } = context.params;
 
     const courseResult = await query(
       'SELECT is_premium FROM courses WHERE id = $1 OR slug = $1',
@@ -42,12 +39,9 @@ export async function GET(
   }
 }
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { courseId: string } }
-) {
+export async function POST(req: NextRequest, context: any) {
   try {
-    const { courseId } = params;
+    const { courseId } = context.params;
     const body = await req.json();
     const { chapter_number, title, content_text, code_example, code_language, tip, practical_title, practical_task, is_free, xp_reward } = body;
 
