@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       password,
       date_of_birth,
       class_level,
-      school_code,
+      registration_code,
     } = body;
 
     // Validate required fields
@@ -49,10 +49,10 @@ export async function POST(req: NextRequest) {
 
     // Lookup school if code provided
     let schoolId = null;
-    if (school_code) {
+    if (registration_code) {
       const school = await query(
         "SELECT id FROM schools WHERE registration_code = $1",
-        [school_code.toUpperCase()]
+        [registration_code.toUpperCase()]
       );
       if (school.rows.length > 0) {
         schoolId = school.rows[0].id;
