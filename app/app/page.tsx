@@ -79,7 +79,10 @@ export default function LearnProApp() {
       const res = await fetch(`/api${endpoint}`, options);
       const data = await res.json();
       
-      if (!res.ok) throw new Error(data.error || 'API Error');
+      if (!res.ok) {
+        const errorMsg = data.error || data.message || 'API Error';
+        throw new Error(errorMsg);
+      }
       return data;
     } catch (error: any) {
       showToast(error.message);
